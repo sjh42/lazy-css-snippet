@@ -1,0 +1,63 @@
+{
+  "publisher": "sjh42",
+  "name": "lazy-css-snippet",
+  "displayName": "lazy-css-snippet",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@8.6.0",
+  "description": "",
+  "author": "sjh42",
+  "license": "MIT",
+  "homepage": "https://github.com/sjh42/lazy-css-snippet#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sjh42/lazy-css-snippet"
+  },
+  "bugs": {
+    "url": "https://github.com/sjh42/lazy-css-snippet/issues"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/sjh42"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "vscode": "^1.78.1"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --external vscode",
+    "dev": "nr build --watch",
+    "lint": "eslint .",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish --no-dependencies",
+    "pack": "vsce package --no-dependencies",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp && nr publish"
+  },
+  "devDependencies": {
+    "@sjh42/eslint-config": "^0.39.5",
+    "@sjh42/ni": "^0.21.3",
+    "@types/node": "^18.16.16",
+    "@types/vscode": "^1.78.1",
+    "@vscode/vsce": "^2.19.0",
+    "bumpp": "^9.1.0",
+    "eslint": "^8.42.0",
+    "esno": "^0.16.3",
+    "pnpm": "^8.6.0",
+    "rimraf": "^5.0.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.1.3",
+    "vite": "^4.2.3",
+    "vitest": "^0.31.4"
+  }
+}
