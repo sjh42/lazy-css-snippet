@@ -1,9 +1,9 @@
 {
-  "publisher": "sjh42",
+  "publisher": "42ovo",
   "name": "lazy-css-snippet",
   "displayName": "lazy-css-snippet",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "packageManager": "pnpm@8.6.0",
   "description": "",
   "author": "sjh42",
