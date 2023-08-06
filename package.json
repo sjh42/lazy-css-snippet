@@ -2,7 +2,7 @@
   "publisher": "sjh42",
   "name": "lazy-css-snippet",
   "displayName": "lazy-css-snippet",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "packageManager": "pnpm@8.6.0",
   "description": "",
@@ -25,11 +25,34 @@
     "dist"
   ],
   "engines": {
-    "vscode": "^1.78.1"
+    "vscode": "^1.77.1"
   },
   "activationEvents": [
     "onStartupFinished"
   ],
+  "contributes": {
+    "configuration": [
+      {
+        "title": "lazy-css-snippet",
+        "properties": {
+          "lazy-css-snippet.custom": {
+            "type": "object",
+            "default": {},
+            "description": "填写你需要的JSON配置项"
+          },
+          "lazy-css-snippet.hover": {
+            "type": "boolean",
+            "default": false
+          },
+          "lazy-css-snippet.line-annotation": {
+            "type": "boolean",
+            "default": true,
+            "description": "是否开启行注释提示"
+          }
+        }
+      }
+    ]
+  },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
@@ -42,8 +65,8 @@
     "release": "bumpp && nr publish"
   },
   "devDependencies": {
-    "@sjh42/eslint-config": "^0.39.5",
-    "@sjh42/ni": "^0.21.3",
+    "@antfu/eslint-config": "^0.39.5",
+    "@antfu/ni": "^0.21.3",
     "@types/node": "^18.16.16",
     "@types/vscode": "^1.78.1",
     "@vscode/vsce": "^2.19.0",
