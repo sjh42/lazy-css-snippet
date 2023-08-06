@@ -1,11 +1,11 @@
 import type { CompletionItemProvider, ExtensionContext } from 'vscode'
 import { CompletionItem, CompletionItemKind, languages } from 'vscode'
-import { getConfig, LANGUAGES } from './config'
+import { getSnippetItem, LANGUAGES } from './config'
 import type { SnippetItem } from './meta'
 import { SnippetMap } from './meta'
 
 const REG = /^#+/
-const USER_SNIPPET: SnippetItem | undefined = getConfig('custom')
+const USER_SNIPPET: SnippetItem = getSnippetItem('custom')
 
 export function RegisterCompletion(ctx: ExtensionContext) {
   const provider: CompletionItemProvider = {

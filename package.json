@@ -44,7 +44,7 @@
             "type": "boolean",
             "default": false
           },
-          "lazy-css-snippet.line-annotation": {
+          "lazy-css-snippet.annotation": {
             "type": "boolean",
             "default": true,
             "description": "是否开启行注释提示"
@@ -70,6 +70,7 @@
     "@types/node": "^18.16.16",
     "@types/vscode": "^1.78.1",
     "@vscode/vsce": "^2.19.0",
+    "@vue/reactivity": "^3.3.4",
     "bumpp": "^9.1.0",
     "eslint": "^8.42.0",
     "esno": "^0.16.3",

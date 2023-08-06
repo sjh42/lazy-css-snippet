@@ -1,15 +1,11 @@
 import { workspace } from 'vscode'
-import { SnippetItem } from './meta'
+import { SnippetItem, SnippetMap } from './meta'
 
-export function getConfig(key: string): SnippetItem | undefined {
-  return workspace.getConfiguration('lazy-css-snippet').get(key)
+export function getSnippetItem(key: string): SnippetItem {
+  return workspace.getConfiguration('lazy-css-snippet').get(key) || SnippetMap
 }
 
-export function getHover(key: string): Boolean | undefined {
-  return workspace.getConfiguration('lazy-css-snippet').get(key)
-}
-
-export function getAnnotation(key: string): Boolean | undefined {
+export function getConfig(key: string): Boolean | undefined {
   return workspace.getConfiguration('lazy-css-snippet').get(key)
 }
 
