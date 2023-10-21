@@ -1,8 +1,8 @@
 import type { CompletionItemProvider, ExtensionContext } from 'vscode'
 import { CompletionItem, CompletionItemKind, languages } from 'vscode'
-import { getSnippetItem, LANGUAGES } from './config'
-import type { SnippetItem } from './meta'
+import { LANGUAGES, getSnippetItem } from './config'
 import { SnippetMap } from './meta'
+import type { SnippetItem } from './meta'
 
 const REG = /^#+/
 const USER_SNIPPET: SnippetItem = getSnippetItem('custom')
@@ -19,7 +19,8 @@ export function RegisterCompletion(ctx: ExtensionContext) {
             completionItem.insertText = `color: ${USER_SNIPPET[key]}`
             completionItem.detail = `color: ${key}`
             return completionItem
-          } else {
+          }
+          else {
             const completionItem = new CompletionItem(key)
             completionItem.kind = CompletionItemKind.Snippet
             completionItem.insertText = `font-size: ${USER_SNIPPET[key]}`
@@ -27,7 +28,8 @@ export function RegisterCompletion(ctx: ExtensionContext) {
             return completionItem
           }
         })
-      } else {
+      }
+      else {
         completionItems = Object.keys(SnippetMap).map((key: string) => {
           if (REG.test(key)) {
             const completionItem = new CompletionItem(key)
@@ -35,7 +37,8 @@ export function RegisterCompletion(ctx: ExtensionContext) {
             completionItem.insertText = `color: ${SnippetMap[key]}`
             completionItem.detail = `color: ${key}`
             return completionItem
-          } else {
+          }
+          else {
             const completionItem = new CompletionItem(key)
             completionItem.kind = CompletionItemKind.Snippet
             completionItem.insertText = `font-size: ${SnippetMap[key]}`
@@ -45,7 +48,7 @@ export function RegisterCompletion(ctx: ExtensionContext) {
         })
       }
       return completionItems
-    }
+    },
   }
 
   ctx.subscriptions.push(languages.registerCompletionItemProvider(LANGUAGES, provider))
