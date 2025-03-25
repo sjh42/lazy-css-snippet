@@ -1,52 +1,50 @@
-import type { CompletionItemProvider, ExtensionContext } from 'vscode'
+import type { CompletionItemProvider, ExtensionContext, TextDocument } from 'vscode'
 import { CompletionItem, CompletionItemKind, languages } from 'vscode'
 import { LANGUAGES, getSnippetItem } from './config'
 import { SnippetMap } from './meta'
 import type { SnippetItem } from './meta'
 
-const REG = /^#+/
-const USER_SNIPPET: SnippetItem = getSnippetItem('custom')
+function getRegexForLanguage(languageId: string): RegExp {
+  switch (languageId) {
+    case 'scss':
+    case 'sass':
+      return /^#+/
+    case 'less':
+      return /^@+/
+    default:
+      return /^--+/
+  }
+}
 
 export function RegisterCompletion(ctx: ExtensionContext) {
   const provider: CompletionItemProvider = {
-    provideCompletionItems() {
+    provideCompletionItems(document: TextDocument) {
+      const REG = getRegexForLanguage(document.languageId)
+
       let completionItems: CompletionItem[] = []
-      if (USER_SNIPPET) {
-        completionItems = Object.keys(USER_SNIPPET).map((key: string) => {
-          if (REG.test(key)) {
-            const completionItem = new CompletionItem(key)
-            completionItem.kind = CompletionItemKind.Snippet
-            completionItem.insertText = `color: ${USER_SNIPPET[key]}`
-            completionItem.detail = `color: ${key}`
-            return completionItem
-          }
-          else {
-            const completionItem = new CompletionItem(key)
-            completionItem.kind = CompletionItemKind.Snippet
-            completionItem.insertText = `font-size: ${USER_SNIPPET[key]}`
-            completionItem.detail = `font-size: ${key}`
-            return completionItem
-          }
-        })
-      }
-      else {
-        completionItems = Object.keys(SnippetMap).map((key: string) => {
-          if (REG.test(key)) {
-            const completionItem = new CompletionItem(key)
-            completionItem.kind = CompletionItemKind.Snippet
-            completionItem.insertText = `color: ${SnippetMap[key]}`
-            completionItem.detail = `color: ${key}`
-            return completionItem
-          }
-          else {
-            const completionItem = new CompletionItem(key)
-            completionItem.kind = CompletionItemKind.Snippet
-            completionItem.insertText = `font-size: ${SnippetMap[key]}`
-            completionItem.detail = `font-size: ${key}`
-            return completionItem
-          }
-        })
-      }
+      
+      const customConfig = getSnippetItem('custom')
+      const hasCustomConfig = customConfig && Object.keys(customConfig).length > 0
+      
+      const snippets: SnippetItem = hasCustomConfig ? customConfig as SnippetItem : SnippetMap
+      
+      completionItems = Object.keys(snippets).map((key: string) => {
+        if (REG.test(key)) {
+          const completionItem = new CompletionItem(key)
+          completionItem.kind = CompletionItemKind.Snippet
+          completionItem.insertText = `color: ${snippets[key]}`
+          completionItem.detail = `color: ${key}`
+          return completionItem
+        }
+        else {
+          const completionItem = new CompletionItem(key)
+          completionItem.kind = CompletionItemKind.Snippet
+          completionItem.insertText = `font-size: ${snippets[key]}`
+          completionItem.detail = `font-size: ${key}`
+          return completionItem
+        }
+      })
+      
       return completionItems
     },
   }

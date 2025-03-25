@@ -20,7 +20,6 @@ export const SnippetMap: SnippetItem = {
   "12px": "$font-s;",
   "13px": "$font-m;",
   "14px": "$font-xm;",
-  "15px": '123',
   "16px": "$font-l;",
   "18px": "$font-xl;",
   "20px": "$font-xxl;",
