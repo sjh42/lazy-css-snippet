@@ -38,11 +38,12 @@
           "lazy-css-snippet.custom": {
             "type": "object",
             "default": {},
-            "description": "填写你需要的JSON配置项"
+            "description": "填写你需要的变量配置项"
           },
           "lazy-css-snippet.hover": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "暂无用途"
           },
           "lazy-css-snippet.annotation": {
             "type": "boolean",
