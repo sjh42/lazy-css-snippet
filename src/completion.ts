@@ -22,12 +22,12 @@ export function RegisterCompletion(ctx: ExtensionContext) {
       const REG = getRegexForLanguage(document.languageId)
 
       let completionItems: CompletionItem[] = []
-      
+
       const customConfig = getSnippetItem('custom')
       const hasCustomConfig = customConfig && Object.keys(customConfig).length > 0
-      
+
       const snippets: SnippetItem = hasCustomConfig ? customConfig as SnippetItem : SnippetMap
-      
+
       completionItems = Object.keys(snippets).map((key: string) => {
         if (REG.test(key)) {
           const completionItem = new CompletionItem(key)
@@ -44,7 +44,7 @@ export function RegisterCompletion(ctx: ExtensionContext) {
           return completionItem
         }
       })
-      
+
       return completionItems
     },
   }

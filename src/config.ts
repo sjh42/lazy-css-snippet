@@ -1,11 +1,11 @@
 import { workspace } from 'vscode'
-import { SnippetItem } from './meta'
+import type { SnippetItem } from './meta'
 
 export function getSnippetItem(key: string): SnippetItem | undefined {
   return workspace.getConfiguration('lazy-css-snippet').get(key)
 }
 
-export function getConfig(key: string, defaultValue: any = false): any | undefined {
+export function getConfig(key: string, defaultValue = false): unknown | undefined {
   return workspace.getConfiguration('lazy-css-snippet').get(key, defaultValue)
 }
 
